@@ -1,5 +1,7 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from starlette.responses import JSONResponse
+import os
 
 # from api.model.FruitDto import FruitDto
 # from api.model.FruitPredictionDto import FruitPredictionDto
@@ -28,3 +30,14 @@ def index() -> dict:
 #     print("This is the API")
 
 #     return FruitPredictionDto()
+
+@app.post('/predict/fruit')
+async def predict_fruits(file: UploadFile) ->  None:
+    if file:
+        # Guarda la imagen en una ruta local
+        file_path = os.path.join(os.path.abspath('./what-is-that-fruit-back/imagenes_prueba'), file.filename)
+        with open(file_path, "wb") as image_file:
+            image_file.write(file.file.read())
+        return None
+    else:
+        return None
