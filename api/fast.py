@@ -3,8 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.responses import JSONResponse
 import os
 
-# from api.model.FruitDto import FruitDto
-# from api.model.FruitPredictionDto import FruitPredictionDto
+from api.model.FruitDto import FruitDto
 
 app = FastAPI()
 
@@ -19,17 +18,6 @@ app.add_middleware(
 @app.get('/')
 def index() -> dict:
     return {'ok': True}
-
-# @app.post('/predict/fruit')
-# async def predictStroke(fruit_dto: FruitDto) -> FruitPredictionDto | None:
-#     print("This is the API")
-#     print("This is the API")
-#     print("This is the API")
-#     print("This is the API")
-#     print("This is the API")
-#     print("This is the API")
-
-#     return FruitPredictionDto()
 
 @app.post('/predict/fruit')
 async def predict_fruits(file: UploadFile) ->  None:
