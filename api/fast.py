@@ -1,9 +1,10 @@
-from fastapi import FastAPI, File, UploadFile
+from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from starlette.responses import JSONResponse
-import os
 
-from api.model.FruitDto import FruitDto
+from api.model.fruit_prediction_dto import FruitPredictionDto
+from api.services.adapters import predictionToPredictionDto
+from ml_logic.predict import predict
+
 
 app = FastAPI()
 
@@ -20,12 +21,10 @@ def index() -> dict:
     return {'ok': True}
 
 @app.post('/predict/fruit')
-async def predict_fruits(file: UploadFile) ->  None:
+async def predict_fruits(file: UploadFile) -> FruitPredictionDto | None:
     if file:
-        # Guarda la imagen en una ruta local
-        file_path = os.path.join(os.path.abspath('./what-is-that-fruit-back/imagenes_prueba'), file.filename)
-        with open(file_path, "wb") as image_file:
-            image_file.write(file.file.read())
-        return None
+        pred = predict(file)
+        response = predictionToPredictionDto(pred)
+        return response
     else:
         return None

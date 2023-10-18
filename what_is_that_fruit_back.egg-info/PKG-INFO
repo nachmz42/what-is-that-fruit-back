@@ -13,6 +13,7 @@ Requires-Dist: seaborn
 Requires-Dist: numpy
 Requires-Dist: pandas
 Requires-Dist: scipy
+Requires-Dist: tensorflow
 Requires-Dist: imblearn
 Requires-Dist: scikit-learn
 Requires-Dist: pytest
@@ -22,4 +23,5 @@ Requires-Dist: db-dtypes
 Requires-Dist: fastapi
 Requires-Dist: uvicorn
 Requires-Dist: pydantic
+Requires-Dist: python-multipart
 Requires-Dist: python-dotenv

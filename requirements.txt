@@ -8,6 +8,8 @@ seaborn
 numpy
 pandas
 scipy
+tensorflow
+opencv-python
 # To balance classes with SMOTE
 imblearn
 scikit-learn
