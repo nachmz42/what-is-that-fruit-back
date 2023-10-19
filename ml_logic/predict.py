@@ -1,13 +1,12 @@
 from ml_logic.preprocess import preprocess
 from ml_logic.registry import load_model
 import numpy as np
-from fastapi import UploadFile
 
 
-def predict(file: UploadFile) -> str:
-
+async def predict() -> str:
+    image_dir = '/home/nachmz42/code/nachmz42/what-is-that-fruit-back/imagenes_prueba/fruit_image.jpg'
     model = load_model()
-    X_pred = preprocess(file)
+    X_pred = preprocess(image_dir)
     img_pred = model.predict(X_pred)
     sample_pred = np.argmax(img_pred)
 
@@ -25,6 +24,4 @@ def predict(file: UploadFile) -> str:
     }
 
     predicted_fruit = fruit_labels_dict[sample_pred]
-
-    print("The predicted fruit is:", predicted_fruit)
     return predicted_fruit
