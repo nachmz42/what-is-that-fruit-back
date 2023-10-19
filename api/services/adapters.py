@@ -8,4 +8,4 @@ def predictionToPredictionDto(pred: str)-> FruitPredictionDto:
     '''
     Converts the prediction string to FruitPredictionDto
     '''
-    return FruitPredictionDto({'prediction':pred})
+    return FruitPredictionDto(prediction=pred)
