@@ -16,7 +16,7 @@ LOCAL_MODEL_PATH = "./models/"
 LOCAL_TRAINING_OUTPUTS_PATH = './models'
 LOCAL_DATA_PATH = "../data/"
 ABSOLUTE_LOCAL_DATA_PATH = "./data"
-````ini
+````
 Please replace the values with the appropriate paths and configurations as needed.
 
 ## Usage
