@@ -9,13 +9,13 @@ from keras.callbacks import EarlyStopping
 from keras.optimizers import Adam
 from colorama import Fore, Style
 
-from environment.params import LABELS_DICT
+from environment.params import ABSOLUTE_LOCAL_DATA_PATH, LABELS_DICT_STR_NUM, LOCAL_DATA_PATH
 from ml_logic.registry import save_model
 
 
 def train():
     #Getting the paths to the data
-    data_dir = pathlib.Path('../data/')
+    data_dir = pathlib.Path(LOCAL_DATA_PATH)
     fruit_images_dict = {
     'apple': list(data_dir.glob('apple fruit/*')),
     'banana': list(data_dir.glob('banana fruit/*')),
@@ -28,8 +28,6 @@ def train():
     'strawberry':list(data_dir.glob('strawberry fruit/*'))
     }
 
-    fruit_labels_dict = LABELS_DICT
-
     IMAGE_WIDTH=64
     IMAGE_HEIGHT=64
     IMAGE_CHANNELS = 3
@@ -39,13 +37,13 @@ def train():
         for image in images:
             img = cv2.imread(str(image))
             if isinstance(img,type(None)):
-                print('image not found at' + str(image))
+                print('Image not found at' + str(image))
                 continue
 
             elif ((img.shape[0] >= IMAGE_HEIGHT) and  (img.shape[1] >=IMAGE_WIDTH)):
                 resized_img = cv2.resize(img,(IMAGE_WIDTH,IMAGE_HEIGHT))
                 X.append(resized_img)
-                Y.append(fruit_labels_dict[fruit_name])
+                Y.append(LABELS_DICT_STR_NUM[fruit_name])
             else:
                 print("Invalid Image at " + str(image))
                 continue
@@ -72,14 +70,14 @@ def train():
                 )
 
     # Import the data into train and Validation subset
-    trainimagedata = datagen.flow_from_directory("/home/nachmz42/code/nachmz42/what-is-that-fruit-back/data",
+    trainimagedata = datagen.flow_from_directory(ABSOLUTE_LOCAL_DATA_PATH,
                                                 batch_size = 32,
                                                 class_mode = 'categorical',
                                                 target_size=(64,64),
                                                 subset = 'training'
                                                 )
 
-    testimagedata = datagen.flow_from_directory("/home/nachmz42/code/nachmz42/what-is-that-fruit-back/data",
+    testimagedata = datagen.flow_from_directory(ABSOLUTE_LOCAL_DATA_PATH,
                                                 batch_size = 32,
                                                 class_mode = 'categorical',
                                                 target_size=(64,64),
@@ -115,12 +113,11 @@ def train():
     early_stop = EarlyStopping(monitor = 'val_loss', patience =15)
     print(Fore.BLUE + f"\nTraining the model..." + Style.RESET_ALL)
     # Fitting the model
-    mdl_history = model.fit(trainimagedata,
+    model.fit(trainimagedata,
                             validation_data = testimagedata,
                             epochs=35,
                             batch_size=16,
                             callbacks=[early_stop])
-    print("✅ Pipeline loaded from local disk")
     print(Fore.BLUE + f"\Saving the model..." + Style.RESET_ALL)
     save_model(model)
     return None

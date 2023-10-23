@@ -5,9 +5,10 @@ import pickle
 import time
 from keras.models import Sequential
 
-from environment.params import LOCAL_TRAINING_OUTPUTS_PATH
+from environment.params import LOCAL_MODEL_PATH
 
-LOCAL_MODEL_PATH = "/home/nachmz42/code/nachmz42/what-is-that-fruit-back/models/"
+
+
 
 def save_model(model: Sequential) -> None:
     timestamp = time.strftime("%Y%m%d-%H%M%S")  # e.g. 20210824-154952
