@@ -27,7 +27,7 @@ To start the API, use the following command:
 
 ```bash
 make run_api
-
+```
 ### Training the Model
 
 If you want to train the model, follow these steps:
@@ -40,7 +40,7 @@ If you want to train the model, follow these steps:
 
    ```bash
    make run_train
-
+   ```
 The training process will generate model files and save them in the specified model directory.
 Now, your model is ready for fruit detection!
 
@@ -53,4 +53,3 @@ For a user-friendly interface to interact with the API and perform fruit detecti
 The frontend provides an intuitive way for users to upload images and receive fruit predictions using the API. You can follow the frontend project's README for installation and usage instructions.
 
 Enjoy using the frontend interface for fruit detection!
-````
