@@ -1,7 +1,5 @@
 # What is That Fruit? 🍎🍌🍊🍇
 
-![Fruit Detection](https://images.app.goo.gl/hnU8VMk7uAa78NsP7)
-
 ## Description
 
 Little personal project to put into practice the skills acquired during the Le Wagon Data Science bootcamp. It's just a page where you can upload an image, and a CNN model (trained with Kaggle data) will detect which fruit it is.
